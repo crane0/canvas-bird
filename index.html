@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小飞鸟</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid silver;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="800px" height="250px"></canvas>
+    <script>
+        var canvas = document.querySelector('canvas');
+        var point = canvas.getContext('2d');
+
+        var imgCode = new Image;
+        var index = 0;
+//        更改 x轴坐标
+        var speed = 0;
+        setInterval(function () {
+            index++;
+            imgCode.src = 'imgs/q_r'+index+'.jpg';
+//            这里，注意是使用 图片的 onload！！
+            imgCode.onload = function () {
+//                擦除指定的矩形（轨迹就没有了）
+                point.clearRect(0,0,800,250);
+                point.drawImage(imgCode,speed,0,138,81);
+            };
+            if(index === 8){
+                index = 0;
+            }
+            speed += 20;
+            if(speed === 800){
+                speed = 0;
+            }
+        },100);
+
+    </script>
+</body>
+</html>
